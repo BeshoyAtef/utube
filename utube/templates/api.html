@@ -1,0 +1,7 @@
+<h1>API</h1>
+{% for var in apicall %}
+{{ var.format }} || {{ var.ext }}
+<a download={{vidtitle}} href={{ var.url }}>{{ var.ext }} {{ var.url|filesizeformat }} </a>
+<br>
+<br>
+{% endfor %}
