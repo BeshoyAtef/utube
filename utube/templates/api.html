@@ -1,7 +1,14 @@
+{% load video_size %}
+
 <h1>API</h1>
 {% for var in apicall %}
-{{ var.format }} || {{ var.ext }}
-<a download={{vidtitle}} href={{ var.url }}>{{ var.ext }} {{ var.url|filesizeformat }} </a>
-<br>
-<br>
+	{% if var.ext == 'mp4' or var.ext == '3gp'   %}
+		{% if 'DASH' not in var.format %}
+			{{ var.format }} || {{ var.ext }}
+			<a download={{vidtitle}} href={{ var.url }}>
+				{{ var.ext }} {% get_size var.url %} 
+			</a>
+			<br>
+		{% endif %}
+	{% endif %}
 {% endfor %}
