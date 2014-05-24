@@ -4,9 +4,14 @@
 {% for var in apicall %}
 	{% if var.ext == 'mp4' or var.ext == '3gp'   %}
 		{% if 'DASH' not in var.format %}
-			{{ var.format }} || {{ var.ext }}
+			{% get_name var.format %}
+			{% if var.ext = 'mp4' %}
+			<span class="label label-success">{{ var.ext }}</span>
+			{% else %}
+			<span class="label label-info">{{ var.ext }}</span>
+			{% endif %}
 			<a download={{vidtitle}} href={{ var.url }}>
-				{{ var.ext }} {% get_size var.url %} 
+				 {% get_size var.url %} 
 			</a>
 			<br>
 		{% endif %}
