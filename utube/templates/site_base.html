@@ -31,10 +31,35 @@
 
 
 {% block script_base %}
-    <script src="{% block jquery_src %}{% static "pinax/js/jquery.js" %}{% endblock %}"></script>
+    <script src="{% block jquery_src %}{% static "js/jquery-1.11.1.min.js" %}{% endblock %}"></script>
     <script src="{% static "js/bootstrap.min.js" %}"></script>
     <script src="{% static "pinax/js/theme.js" %}"></script>
     <!-- <script type="text/javascript" src="/path/to/jquery/jquery-1.10.2.min.js"></script> -->
     <script type="text/javascript" src="{% static "js/bootstrapValidator.min.js" %}"></script>
+    <script type="text/javascript">
+
+
+    $(document).ready(function() {
+        $('#linkForm').bootstrapValidator({
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                link: {
+                    validators: {
+                        regexp: {
+                            regexp: /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/,
+                            message: 'Please Check the link provided'
+                        }
+                    }
+                }
+            }
+        });
+    });
+
+
+    </script>
     {% block extra_script %}{% endblock %}
 {% endblock %}

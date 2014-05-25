@@ -18,10 +18,13 @@
     
     <h2>Download</h2>
     <p>
-        <div class="form-group has-feedback">
-          <label class="control-label" for="inputSuccess1">link</label>
-          <input class="form-control input-lg" type="url" placeholder="ادخل الرابط" id="inputSuccess1">
-        </div>
+        <form id="linkForm" class="form-group has-feedback">
+            <div class="form-group">
+                <label class="control-label" for="inputlink">link</label>
+                    <input class="form-control input-lg" type="url" placeholder="ادخل الرابط" id="inputlink" name="link" />
+            </div>
+        </form>
+
     </p>
     
     {% if user.is_authenticated %}
@@ -31,19 +34,14 @@
         {% url "account_login" as login_url %}
         {% url "account_signup" as signup_url %}
         <p>{% blocktrans %}You can <a href="{{ login_url }}" class="btn btn-default">Log In</a> or <a href="{{ signup_url }}" class="btn btn-primary">Sign Up</a> to try out the site.{% endblocktrans %}</p>
+     {% block extra_script %}    
         <script type="text/javascript">
 
 
-        /**
-         * JavaScript function to match (and return) the video Id 
-         * of any valid Youtube Url, given as input string.
-         * @author: Stephan Schmitz <eyecatchup@gmail.com>
-         * @url: http://stackoverflow.com/a/10315969/624466
-         */
-        function ytVidId(url) {
-          var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
-          return (url.match(p)) ? RegExp.$1 : false;
-        }
+
+
+
         </script>
+    {% endblock %}   
     {% endif %}
 {% endblock %}
