@@ -9,18 +9,18 @@ def get_size(url):
     size = vid.headers['Content-Length']
     return filesizeformat(int(size))
 
-@register.simple_tag
+@register.simple_tag 
 def get_name(str_name):
-    name_array=str_name.split('x')
-    try:
-        name=name_array[1]
+    name_array=str_name.split('x')     
+    try:         
+        name=name_array[1]     
     except:
-        name_array=str_name.split(' ')
-        try:
+        name_array=str_name.split(' ')         
+        try:             
             name = name_array[2]
-            formated = name_array[3]
-            return name + '<span class="label label-danger">'+str(formated)+'</span>'
-        except:
+            formated = name_array[3]             
+            return name + '<span class="label label-danger">'+str(formated)+'</span>'         
+        except:             
             name = str_name
-            return name
+            return name     
     return name+str('p')
