@@ -18,13 +18,27 @@
     
     <h2>Download</h2>
     <p>
-        <form id="linkForm" class="form-group has-feedback">
-            <div class="form-group">
-                <label class="control-label" for="inputlink">link</label>
-                    <input class="form-control input-lg" type="url" placeholder="ادخل الرابط" id="inputlink" name="link" />
+
+        <form id="linkForm" class="form-group has-feedback" class="" role="form" 
+        style="margin-bottom: 0;">
+            <div class="form-group has-feedback" style="margin-bottom: 0;">
+                <label class="control-label " for="inputlink">link</label>
+                <div class="">
+                  <input class="form-control  input-lg" type="text" placeholder="ادخل الرابط" id="inputlink" name="link" required /> 
+                </div>
+            </div>
+            <div class="btn-group btn-lg btn-group-justified" style="padding: 0;padding-top:13px">
+                <div class="btn-group ">
+                    <button type="button" class="btn btn-lg btn-info">صوت فقط MP3 <span class="glyphicon glyphicon-headphones"></span></button>
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-lg btn-warning">أقل مساحة MP4 <span class="glyphicon glyphicon-sd-video"></span></button>
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-lg btn-success">أعلي جودة MP4 HD <span class="glyphicon glyphicon-facetime-video"></span></button>
+                </div>
             </div>
         </form>
-
     </p>
     
     {% if user.is_authenticated %}
@@ -33,15 +47,6 @@
     {% else %}
         {% url "account_login" as login_url %}
         {% url "account_signup" as signup_url %}
-        <p>{% blocktrans %}You can <a href="{{ login_url }}" class="btn btn-default">Log In</a> or <a href="{{ signup_url }}" class="btn btn-primary">Sign Up</a> to try out the site.{% endblocktrans %}</p>
-     {% block extra_script %}    
-        <script type="text/javascript">
-
-
-
-
-
-        </script>
-    {% endblock %}   
+        <p>{% blocktrans %}You can <a href="{{ login_url }}" class="btn btn-default">Log In</a> or <a href="{{ signup_url }}" class="btn btn-primary">Sign Up</a> to try out the site.{% endblocktrans %}</p> 
     {% endif %}
 {% endblock %}
