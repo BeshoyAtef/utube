@@ -1,19 +1,69 @@
 {% load video_size %}
+<div class="panel panel-default">
+  <div class="panel-body text-center" >
+    {{vidtitle_full}}
+  </div>
+  <div class="panel-footer">
+  	<div class="row">
+  	  <div class="col-sm-6 col-md-4">
+  	    <div class="thumbnail">
+  	      <img src={{more.thumbnail}} alt={{vidtitle_full}} >
+  	      <div class="caption">
+  	        <h3>{{vidtitle_full}}</h3>
+  	        <p style="font-size:14px">{{more.description|slice:":220" }}</p>
+  	       
+  	        <table class="table table-hover ">
+  	        	<tr>
+  	        		<td><span class="glyphicon glyphicon-thumbs-up center-block"></span></td>
+  	        		<td><span class="glyphicon glyphicon-eye-open center-block"></span></td>
+  	        		<td><span class="glyphicon glyphicon-facetime-video center-block"></span></td>
+  	        	</tr>
+  	        	<tr>
+  	        		<td class="text-center">{{more.like_count}}</td>
+  	        		<td class="text-center">{{more.view_count}}</td>
+  	        		<td class="text-center">{% dur more.duration %}</td>
+  	        	</tr>
+  	        </table>
+			
+  	      </div>
+  	    </div>
+  	  </div>
+  <ul class="list-group col-sm-8 col-md-6"> 
+  <li class="list-group-item text-center"><strong>لبدء التحميل اضغط علي الجودة المطلوبة</strong></li> 
+  {% for var in apicall %}
+  	{% if var.ext == 'mp4' or var.ext == '3gp'   %}
+  		{% if 'DASH' not in var.format %}
+  			{% if '(3D)' not in var.format %}
+  				{% if var.ext = 'mp4' %}
+  					
+  						{% if forloop.first%}أقل جودة - {% endif%}
+  						{% if forloop.last%}
+  						<a download={{vidtitle|add:'.'|add:var.ext}} href={{ var.url }}  class="list-group-item  list-group-item-success"><span class="glyphicon glyphicon-download-alt"></span> أعلي جودة - 
+  							{% else %}<a download={{vidtitle}} href={{ var.url }} class="list-group-item  list-group-item-info"><span class="glyphicon glyphicon-download-alt"></span>  جودة متوسطة - 
+  							{% endif%}
+  					{% get_name var.format %}
+  					<span class="badge">
+  						{{ var.ext }}</span>
+  				{% else %}
+  					
+  						{% if forloop.last%}
+  						<a download={{vidtitle|add:'.'|add:var.ext}} href={{ var.url }}  class="list-group-item  list-group-item-success"><span class="glyphicon glyphicon-download-alt"></span> أعلي جودة - 
+  							{% else %}<a download={{vidtitle|add:'.'|add:var.ext}} href={{ var.url }}  class="list-group-item  list-group-item-warning"><span class="glyphicon glyphicon-download-alt"></span> 	جودة ضعيفة - 
+  							{% endif%}
+  					{% get_name var.format %}
+  				    <span class="badge">
+  				    	{{ var.ext }} </span>
+  					{% endif %}
 
-<h1>API</h1>
-{% for var in apicall %}
-	{% if var.ext == 'mp4' or var.ext == '3gp'   %}
-		{% if 'DASH' not in var.format %}
-			{% get_name var.format %}
-			{% if var.ext = 'mp4' %}
-			<span class="label label-success">{{ var.ext }}</span>
-			{% else %}
-			<span class="label label-info">{{ var.ext }}</span>
-			{% endif %}
-			<a download={{vidtitle}} href={{ var.url }}>
-				 {% get_size var.url %} 
-			</a>
-			<br>
-		{% endif %}
-	{% endif %}
-{% endfor %}
+  					</a>
+  			{% endif %}
+  		{% endif %}
+  	{% endif %}
+  {% endfor %}
+  </ul>	
+  </div>
+</div>
+  	</div>
+
+
+{{more}}

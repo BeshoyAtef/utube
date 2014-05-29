@@ -10,6 +10,9 @@
     <link href="{% static "css/site.css" %}" rel="stylesheet">
     <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
     <link  href="{% static "css/bootstrapValidator.min.css" %}" rel="stylesheet"/>
+    <link href="{% static "css/bootstrap-rtl.css" %}" rel="stylesheet">
+    
+    
 
     {% block extra_style %}{% endblock %}
 {% endblock %}
@@ -39,8 +42,10 @@
     <script type="text/javascript" src="{% static "js/bootstrapValidator.min.js" %}"></script>
     <script type="text/javascript">
 
-
     $(document).ready(function() {
+        $('#inputlink').keyup(function(){
+            $('#submit_btn').click();
+        });
         $('#linkForm').bootstrapValidator({
             feedbackIcons: {
                 valid: 'glyphicon glyphicon-ok',
@@ -48,6 +53,9 @@
                 validating: 'glyphicon glyphicon-refresh'
             },
             submitHandler: function(validator, form, submitButton) {
+            $('#loading_div').fadeIn();
+            $('#inputlink').prop('readonly', true);
+            $('#submit_btn').fadeOut();
             $.post(form.attr('action'), form.serialize(), function(result) {
                 // The result is a JSON formatted by your back-end
                 // I assume the format is as following:
@@ -55,7 +63,11 @@
                 //      valid: true,          // false if the account is not found
                 //      username: 'Username', // null if the account is not found
                 //  }
+
                 $('#result_div').html(result);
+                $('#loading_div').fadeOut();
+                $('#submit_btn').fadeIn();
+                $('#inputlink').prop('disabled', false);
                 if (result.valid == true || result.valid == 'true') {
                     // You can reload the current location
                     window.location.reload();

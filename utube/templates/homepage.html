@@ -8,25 +8,91 @@
 
 
 {% block banner %}
-    <h1>{% trans "Welcome to Pinax" %}</h1>
+<!--     <h1>{% trans "Welcome to Pinax" %}</h1>
     <p>
         {% blocktrans %}
         <b>Pinax</b> is a <a href="http://djangoproject.com/">Django</a>
         project intended to provide a starting point for websites. .
         {% endblocktrans %}
-    </p>
-    
-    <h2>Download</h2>
+    </p> -->
+    <style type="text/css">
+    .spinner {
+      width: 50px;
+      height: 30px;
+      text-align: center;
+      font-size: 10px;
+    }
+
+    .spinner > div {
+      background-color: #333;
+      height: 100%;
+      width: 6px;
+      display: inline-block;
+      
+      -webkit-animation: stretchdelay 1.2s infinite ease-in-out;
+      animation: stretchdelay 1.2s infinite ease-in-out;
+    }
+
+    .spinner .rect2 {
+      -webkit-animation-delay: -1.1s;
+      animation-delay: -1.1s;
+    }
+
+    .spinner .rect3 {
+      -webkit-animation-delay: -1.0s;
+      animation-delay: -1.0s;
+    }
+
+    .spinner .rect4 {
+      -webkit-animation-delay: -0.9s;
+      animation-delay: -0.9s;
+    }
+
+    .spinner .rect5 {
+      -webkit-animation-delay: -0.8s;
+      animation-delay: -0.8s;
+    }
+
+    @-webkit-keyframes stretchdelay {
+      0%, 40%, 100% { -webkit-transform: scaleY(0.4) }  
+      20% { -webkit-transform: scaleY(1.0) }
+    }
+
+    @keyframes stretchdelay {
+      0%, 40%, 100% { 
+        transform: scaleY(0.4);
+        -webkit-transform: scaleY(0.4);
+      }  20% { 
+        transform: scaleY(1.0);
+        -webkit-transform: scaleY(1.0);
+      }
+    }
+    section{
+        padding-top: 0px
+    }
+    </style>  
+    <h2>ألصق الرابط للتحميل</h2>
     <p>
-
-        <form id="linkForm" class="form-group has-feedback" class="" role="form" 
+        <form id="linkForm" class="form-group has-feedback " class="" role="form" 
         style="margin-bottom: 0;" action="call/" method="post">
+        <div id="loading_div" style="display: none;">
+            <h3>جاري معالجة الرابط و تهيئة الفيديو للتحميل </h3>           
+            <div class="spinner">
+                <div class="rect1"></div>
+                <div class="rect2"></div>
+                <div class="rect3"></div>
+                <div class="rect4"></div>
+                <div class="rect5"></div>
+            </div>
+        </div>
+        {% csrf_token %}
             <div class="form-group has-feedback" style="margin-bottom: 0;">
-                <label class="control-label " for="inputlink">link</label>
-                <div class="">
-                  <input class="form-control  input-lg" type="text" placeholder="ادخل الرابط" id="inputlink" name="link" required /> 
-                    <input type="submit" value="Submit">
 
+<!--                 <label class="control-label " for="inputlink">link</label>
+ -->
+                <div class="">
+                  <input class="form-control  input-lg" type="text" placeholder="ادخل الرابط هنا" id="inputlink" name="link" required  /> 
+                    <button id="submit_btn" type="submit" value="تحميل" class="btn btn-success btn-lg btn-bl" >تحميل</button>
                 </div>
             </div>
 <!--                 <div class="blocks">
