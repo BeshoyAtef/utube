@@ -16,6 +16,10 @@ def call(request):
 	  return render_to_response('api.html', {
 	  	'apicall':data['videos'][0]['formats'],
 	  	'vidtitle' : data['videos'][0]['title'].replace (" ", "_")[:200],
+	  	'vidtitle_full' : data['videos'][0]['title'],
+	  	'more' : data['videos'][0],
+	  	'orig' : link
+
 	  	})
 	except urllib2.URLError, e:
 	  print(e)
