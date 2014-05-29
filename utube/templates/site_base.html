@@ -47,6 +47,31 @@
                 invalid: 'glyphicon glyphicon-remove',
                 validating: 'glyphicon glyphicon-refresh'
             },
+            submitHandler: function(validator, form, submitButton) {
+            $.post(form.attr('action'), form.serialize(), function(result) {
+                // The result is a JSON formatted by your back-end
+                // I assume the format is as following:
+                //  {
+                //      valid: true,          // false if the account is not found
+                //      username: 'Username', // null if the account is not found
+                //  }
+                $('#result_div').html(result);
+                if (result.valid == true || result.valid == 'true') {
+                    // You can reload the current location
+                    window.location.reload();
+
+                    // Or use Javascript to update your page, such as showing the account name
+                    $('#result_div').html(result);
+                } else {
+                        // The account is not found
+                    // Show the errors
+                        $('#errors').html('The account is not found').removeClass('hide');
+
+                    // Enable the submit buttons
+                       $('#loginForm').bootstrapValidator('disableSubmitButtons', false);
+                        }
+                }, 'html');
+            },
             fields: {
                 link: {
                     validators: {

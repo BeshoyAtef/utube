@@ -20,11 +20,13 @@
     <p>
 
         <form id="linkForm" class="form-group has-feedback" class="" role="form" 
-        style="margin-bottom: 0;">
+        style="margin-bottom: 0;" action="call/" method="post">
             <div class="form-group has-feedback" style="margin-bottom: 0;">
                 <label class="control-label " for="inputlink">link</label>
                 <div class="">
                   <input class="form-control  input-lg" type="text" placeholder="ادخل الرابط" id="inputlink" name="link" required /> 
+                    <input type="submit" value="Submit">
+
                 </div>
             </div>
 <!--                 <div class="blocks">
@@ -33,7 +35,9 @@
                     <button type="button" class="btn btn-lg btn-success">أعلي جودة MP4 HD <span class="glyphicon glyphicon-facetime-video"></span></button>
                 </div> -->
         </form>
+        <div id="result_div"></div>
     </p>
+
     
     {% if user.is_authenticated %}
         {% url "what_next" as what_next_url %}
