@@ -1,6 +1,8 @@
 from django import template
 import requests
 from django.template.defaultfilters import filesizeformat
+import time
+
 register = template.Library()
 
 @register.simple_tag
@@ -24,3 +26,9 @@ def get_name(str_name):
             name = str_name
             return name     
     return name+str('p')
+
+@register.simple_tag 
+def dur(dur_sec):
+    return time.strftime('%H:%M:%S', time.gmtime(dur_sec))
+
+
