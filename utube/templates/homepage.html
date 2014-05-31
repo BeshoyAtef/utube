@@ -103,7 +103,6 @@
         </form>
         <div id="result_div"></div>
     </p>
-
     
     {% if user.is_authenticated %}
         {% url "what_next" as what_next_url %}
@@ -114,3 +113,12 @@
         <p>{% blocktrans %}You can <a href="{{ login_url }}" class="btn btn-default">Log In</a> or <a href="{{ signup_url }}" class="btn btn-primary">Sign Up</a> to try out the site.{% endblocktrans %}</p> 
     {% endif %}
 {% endblock %}
+
+        {% block column-1 %}
+        {% endblock %}
+        {% block column-2 %}
+        {% endblock %}
+        {% block column-3 %}
+        {% endblock %}
+        {% block column-4 %}
+        {% endblock %}
