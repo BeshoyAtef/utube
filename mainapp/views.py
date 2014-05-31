@@ -9,7 +9,7 @@ import json
 def call(request):
 	print (request)
 	link = request.POST.get('link')
-	url = "https://youtube-dl.appspot.com/api/info?url="+link
+	url = "http://localhost:9191/api/info?url="+link
 	try:
 	  result = urllib2.urlopen(url)
 	  data = json.load(result)
